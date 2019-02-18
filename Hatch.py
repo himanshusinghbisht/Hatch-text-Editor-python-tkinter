@@ -71,7 +71,7 @@ def gray43():
 
 def PYTHON():
 	interpreter = Toplevel(root)
-	TextBox = Text(interpreter,bg="gray19",fg="white")
+	TextBox = Text(interpreter,bg="gray19",fg="white",font=("Helvetica", 13 , " italic"))
 	TextBox.pack(fill=BOTH,expand=True)
 	
 	file = open("python.py","w")
@@ -82,7 +82,7 @@ def PYTHON():
 	os.system("python python.py > output.txt")
 	file = open("output.txt","r")
 	
-	TextBox.insert(END,"Hatch >> " + file.read())
+	TextBox.insert(END,"Hatch-py>> " + file.read())
 	file.close()
 	os.remove("python.py")
 	os.remove("output.txt")
@@ -90,7 +90,7 @@ def PYTHON():
 	TextBox.config(state=DISABLED)
 def Cplus():
 	interpreter = Toplevel(root)
-	TextBox = Text(interpreter,bg="gray19",fg="white")
+	TextBox = Text(interpreter,bg="gray19",fg="white",font=("Helvetica", 13 , " italic"))
 	TextBox.pack(fill=BOTH,expand=True)
 	
 	file = open("C.cpp","w")
@@ -101,7 +101,7 @@ def Cplus():
 	os.system("g++ C.cpp && ./a.out > output.txt")
 	file = open("output.txt","r")
 	
-	TextBox.insert(END,"wick-interpreter >> " + file.read())
+	TextBox.insert(END,"Hatch-c++ >> " + file.read())
 	file.close()
 	os.remove("C.cpp")
 	os.remove("output.txt")
