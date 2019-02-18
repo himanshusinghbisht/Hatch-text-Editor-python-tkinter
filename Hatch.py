@@ -82,7 +82,7 @@ def PYTHON():
 	os.system("python python.py > output.txt")
 	file = open("output.txt","r")
 	
-	TextBox.insert(END,"wick-interpreter >> " + file.read())
+	TextBox.insert(END,"Hatch >> " + file.read())
 	file.close()
 	os.remove("python.py")
 	os.remove("output.txt")
