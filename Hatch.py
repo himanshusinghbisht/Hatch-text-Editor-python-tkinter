@@ -1,16 +1,15 @@
 from tkinter import *
-
+import os
 from tkinter import messagebox
-from tkinter import filedialog
-from tkinter.filedialog import *
 
+from tkinter import filedialog
 root = Tk()
-root.title('Hatch-Editor v 1.0')
- 
+root.title('Hatch-Editor v 1.1')
+root.call('encoding', 'system', 'utf-8')
 root.geometry('400x400')
 #######################################
 text=Text(root)
-text.config(font=("Helvetica", 13 , " italic"))
+text.config(font=("Helvetica", 13 , " italic"),bg="gray19",fg="white")
 scrollbar = Scrollbar(root)
 scrollbar.pack(side=RIGHT,fill=Y)
 text.config(yscrollcommand=scrollbar.set)
@@ -19,7 +18,7 @@ scrollbar.config(command=text.yview)
 text.pack(fill=BOTH, expand=True)
 
 def show():
-	messagebox.showinfo("About Hatch-Editor v 1.0","Hatch is a Text editor made by   Mr Himanshu singh Bisht  ||   (wick) ||  {Boogeyman}")
+	messagebox.showinfo("About Hatch-Editor v 1.1","Hatch is a Text editor made by   Mr Himanshu singh Bisht  ||   (wick) ||  {Boogeyman}")
 def file_open():
 	filename =  filedialog.askopenfilename(initialdir = "/home/",title = "Select file",defaultextension=".txt",filetypes = (("txt files","*.txt"),("all files","*.*")))
 	if filename == "":
@@ -67,7 +66,47 @@ def burlywood3():
 	text.config(bg="burlywood3",fg="black")
 def gray43():
 	text.config(bg="gray43",fg="white")
- 
+
+##########################################
+
+def PYTHON():
+	interpreter = Toplevel(root)
+	TextBox = Text(interpreter,bg="gray19",fg="white")
+	TextBox.pack(fill=BOTH,expand=True)
+	
+	file = open("python.py","w")
+	file.write(text.get(1.0,END))
+	file.close()
+	
+	os.system("touch output.txt")
+	os.system("python python.py > output.txt")
+	file = open("output.txt","r")
+	
+	TextBox.insert(END,"wick-interpreter >> " + file.read())
+	file.close()
+	os.remove("python.py")
+	os.remove("output.txt")
+	os.remove("a.out")
+	TextBox.config(state=DISABLED)
+def Cplus():
+	interpreter = Toplevel(root)
+	TextBox = Text(interpreter,bg="gray19",fg="white")
+	TextBox.pack(fill=BOTH,expand=True)
+	
+	file = open("C.cpp","w")
+	file.write(text.get(1.0,END))
+	file.close()
+	
+	os.system("touch output.txt")
+	os.system("g++ C.cpp && ./a.out > output.txt")
+	file = open("output.txt","r")
+	
+	TextBox.insert(END,"wick-interpreter >> " + file.read())
+	file.close()
+	os.remove("C.cpp")
+	os.remove("output.txt")
+	TextBox.config(state=DISABLED)
+	
 ###########################################
 menubar = Menu(root)
 filemenu = Menu(menubar,tearoff=0)
@@ -79,7 +118,9 @@ edit.add_command(label='Cut',command=cut)
 edit.add_command(label='Copy',command=copy)
 edit.add_command(label='Paste',command=paste)
 
-color = Menu(menubar,tearoff=0)
+color = Menu(menubar)
+PYTHON = menubar.add_command(label="PYTHON",command=PYTHON)
+C = menubar.add_command(label="C++",command=Cplus)
 color.add_command(label="red",command=red)
 color.add_command(label="yellow",command=yellow)
 color.add_command(label="green",command=green)
@@ -125,3 +166,4 @@ menubar.add_cascade(label="Help",menu=about )
 
 root.config(menu=menubar)
 root.mainloop()
+
