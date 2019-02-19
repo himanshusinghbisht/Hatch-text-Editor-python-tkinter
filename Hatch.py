@@ -16,7 +16,11 @@ text.config(yscrollcommand=scrollbar.set)
 scrollbar.config(command=text.yview)
 
 text.pack(fill=BOTH, expand=True)
+###############################################33
 
+pythonicon=PhotoImage(file="index.png")
+cplusicon = PhotoImage(file="index2.png")
+###########################################33
 def show():
 	messagebox.showinfo("About Hatch-Editor v 1.1","Hatch is a Text editor made by   Mr Himanshu singh Bisht  ||   (wick) ||  {Boogeyman}")
 def file_open():
@@ -120,8 +124,8 @@ edit.add_command(label='Copy',command=copy)
 edit.add_command(label='Paste',command=paste)
 
 color = Menu(menubar)
-PYTHON = menubar.add_command(label="PYTHON",command=PYTHON)
-C = menubar.add_command(label="C++",command=Cplus)
+PYTHON = menubar.add_command(label="PYTHON",image=pythonicon,command=PYTHON)
+C = menubar.add_command(label="C++",command=Cplus,image=cplusicon)
 color.add_command(label="red",command=red)
 color.add_command(label="yellow",command=yellow)
 color.add_command(label="green",command=green)
@@ -155,7 +159,7 @@ fontstyle.add_command(label="Symbol",command=symbol)
 
 menubar.add_cascade(label="Font-Style",menu = fontstyle)
 #############
-about.add_command(label="About" , command=show)
+about.add_command(label="About" ,accelerator='F1', command=show)
 menubar.add_cascade(label="Help",menu=about )
 
 
