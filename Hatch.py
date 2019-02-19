@@ -105,6 +105,7 @@ def Cplus():
 	file.close()
 	os.remove("C.cpp")
 	os.remove("output.txt")
+	os.remove("a.out")
 	TextBox.config(state=DISABLED)
 	
 ###########################################
