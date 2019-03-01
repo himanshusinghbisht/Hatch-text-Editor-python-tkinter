@@ -4,6 +4,7 @@ from tkinter import messagebox
 
 from tkinter import filedialog
 root = Tk()
+
 root.title('Hatch-Editor v 1.1')
 root.call('encoding', 'system', 'utf-8')
 root.geometry('400x400')
@@ -18,9 +19,10 @@ scrollbar.config(command=text.yview)
 text.pack(fill=BOTH, expand=True)
 ###############################################33
 
-pythonicon=PhotoImage(file="index.png")
-cplusicon = PhotoImage(file="index2.png")
-###########################################33
+#pythonicon=PhotoImage(file="index.png")
+#cplusicon = PhotoImage(file="index2.png")
+
+
 def show():
 	messagebox.showinfo("About Hatch-Editor v 1.1","Hatch is a Text editor made by   Mr Himanshu singh Bisht  ||   (wick) ||  {Boogeyman}")
 def file_open():
@@ -58,6 +60,7 @@ def yellow():
 	text.config(bg="yellow",fg="black")
 def gray():
 	text.config(bg="gray19",fg="white")
+
 def black():
 	text.config(bg="black",fg="white")
 def mintcream():
@@ -74,34 +77,38 @@ def gray43():
 ##########################################
 
 def PYTHON():
-	interpreter = Toplevel(root)
-	TextBox = Text(interpreter,bg="gray19",fg="white",font=("Helvetica", 13 , " italic"))
-	TextBox.pack(fill=BOTH,expand=True)
+	#interpreter = Toplevel(root)
+	#TextBox = Text(interpreter,bg="gray19",fg="white",font=("Helvetica", 13 , " italic"))
+	#TextBox.pack(fill=BOTH,expand=True)
 	
 	file = open("python.py","w")
 	file.write(text.get(1.0,END))
 	file.close()
 	
+	os.system('gnome-terminal -x bash -c  "   python python.py;rm python.py; echo; echo;echo;echo ; echo -e " \t\t EXECUTED"  ; timeout  1 bash  "')
+	'''
 	os.system("touch output.txt")
 	os.system("python python.py > output.txt")
+	
 	file = open("output.txt","r")
 	
 	TextBox.insert(END,"Hatch-py>> " + file.read())
-	file.close()
-	os.remove("python.py")
-	os.remove("output.txt")
-	os.remove("a.out")
-	TextBox.config(state=DISABLED)
+	file.close()'''
+	
+	#os.remove("output.txt")
+	#os.remove("a.out")
+	#TextBox.config(state=DISABLED)
 def Cplus():
-	interpreter = Toplevel(root)
-	TextBox = Text(interpreter,bg="gray19",fg="white",font=("Helvetica", 13 , " italic"))
-	TextBox.pack(fill=BOTH,expand=True)
+	#interpreter = Toplevel(root)
+	#TextBox = Text(interpreter,bg="gray19",fg="white",font=("Helvetica", 13 , " italic"))
+	#TextBox.pack(fill=BOTH,expand=True)
 	
 	file = open("C.cpp","w")
 	file.write(text.get(1.0,END))
 	file.close()
 	
-	os.system("touch output.txt")
+	os.system('gnome-terminal -x sh -c  " g++ C.cpp; ./a.out ; rm C.cpp ; rm  a.out; echo;echo;echo Executed ; timeout 1 bash "')
+'''	os.system("touch output.txt")
 	os.system("g++ C.cpp && ./a.out > output.txt")
 	file = open("output.txt","r")
 	
@@ -111,8 +118,13 @@ def Cplus():
 	os.remove("output.txt")
 	os.remove("a.out")
 	TextBox.config(state=DISABLED)
-	
+	'''
 ###########################################
+
+
+######################################### BINDING	
+#root.bind('<h>',show)
+###########################################33
 menubar = Menu(root)
 filemenu = Menu(menubar,tearoff=0)
 
@@ -124,8 +136,9 @@ edit.add_command(label='Copy',command=copy)
 edit.add_command(label='Paste',command=paste)
 
 color = Menu(menubar)
-PYTHON = menubar.add_command(label="PYTHON",image=pythonicon,command=PYTHON)
-C = menubar.add_command(label="C++",command=Cplus,image=cplusicon)
+PYTHON = menubar.add_command(label="PYTHON",command=PYTHON)
+C = menubar.add_command(label="C++",command=Cplus)
+
 color.add_command(label="red",command=red)
 color.add_command(label="yellow",command=yellow)
 color.add_command(label="green",command=green)
@@ -142,6 +155,7 @@ menubar.add_cascade(label="Edit",menu=edit)
 #filemenu.add_command(label="New" )
 filemenu.add_command(label="Open",command=file_open )
 filemenu.add_command(label="Save",command=save_file )
+root.bind('Control-s',save_file)
 filemenu.add_separator()
 filemenu.add_command(label='Exit',command=root.destroy)
 menubar.add_cascade(label="File",menu=filemenu )
@@ -159,11 +173,12 @@ fontstyle.add_command(label="Symbol",command=symbol)
 
 menubar.add_cascade(label="Font-Style",menu = fontstyle)
 #############
-about.add_command(label="About" ,accelerator='F1', command=show)
+about.add_command(label="About" ,accelerator='h', command=show)
 menubar.add_cascade(label="Help",menu=about )
 
 
 ################################################
+
 
 
 
